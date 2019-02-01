@@ -10,7 +10,6 @@ if [ "$option" = "-s" ]; then
 
   for elem in "${@:2:10}"
   do
-    echo $elem
     if [ $i == 0 ]; then
       regex="$regex$elem"
     else
@@ -30,6 +29,7 @@ if [ "$option" = "-s" ]; then
     do
       if [[ $file =~ $regex ]]; then
         target="$target $file"
+        echo $target
         echo $target | pbcopy
         break
       else
