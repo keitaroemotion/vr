@@ -24,4 +24,9 @@ Usage
 $vr [word1] [word2] [word3] ...
 ```
 
+If you are already on vim editor, just add `-s` option
+to add it to clipboard: [Mac Only]
 
+```
+$ vr -s [word1] [word2] [word3] ...
+```

@@ -1,32 +1,70 @@
 regex=""
 
-i=0
+option=$1
 
-for elem in "${@}"
-do
-  if [ $i == 0 ]; then
-    regex="$regex$elem"
-  else
-    regex="$regex.*$elem"
-  fi
+#
+# TODO: eliminate stupid duplication
+#
+if [ "$option" = "-s" ]; then
+  i=0
 
-  i=$((i+1))
-done
-
-regex="$regex.*"
-
-IFS=';' read -r -a array <<< "$(find . -type f | tr "\n" ";")"
-
-target=""
-
-for file in "${array[@]}"
+  for elem in "${@:2:10}"
   do
-    if [[ $file =~ $regex ]]; then
-      echo $file
-      target="$target $file"
+    echo $elem
+    if [ $i == 0 ]; then
+      regex="$regex$elem"
     else
-      echo > /dev/null
+      regex="$regex.*$elem"
     fi
+  
+    i=$((i+1))
   done
 
-vim $target
+  regex="$regex.*"
+
+  IFS=';' read -r -a array <<< "$(find . -type f | tr "\n" ";")"
+  
+  target=""
+  
+  for file in "${array[@]}"
+    do
+      if [[ $file =~ $regex ]]; then
+        echo "$target $file"
+        echo "$target $file" | pbcopy
+        break
+      else
+        echo > /dev/null
+      fi
+    done
+else
+  i=0
+  
+  for elem in "${@}"
+  do
+    if [ $i == 0 ]; then
+      regex="$regex$elem"
+    else
+      regex="$regex.*$elem"
+    fi
+  
+    i=$((i+1))
+  done
+  
+  regex="$regex.*"
+  
+  IFS=';' read -r -a array <<< "$(find . -type f | tr "\n" ";")"
+  
+  target=""
+  
+  for file in "${array[@]}"
+    do
+      if [[ $file =~ $regex ]]; then
+        echo $file
+        target="$target $file"
+      else
+        echo > /dev/null
+      fi
+    done
+  
+  vim $target
+fi
