@@ -21,7 +21,7 @@ Usage
 =========================
 
 ```
-$vr [word1] [wprd2] [word3] ...
+$vr [word1] [word2] [word3] ...
 ```
 
 
