@@ -24,3 +24,20 @@ Usage
 $vr [word1] [wprd2] [word3] ...
 ```
 
+Basically, the situation you are on the vim editor is
+taken into account. Such that:
+
+If you are developing on rails project,
+
+```
+:! vr app contro par
+```
+
+as a result, it opens
+
+```
+./app/controller/parts_controller.rb
+./app/controller/party_controller.rb
+```
+
+
