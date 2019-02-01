@@ -30,11 +30,12 @@ if [ "$option" = "-s" ]; then
     do
       if [[ $file =~ $regex ]]; then
         target="$target $file"
+        echo $target | pbcopy
+        break
       else
         echo > /dev/null
       fi
     done
-  echo $target | pbcopy
 else
   i=0
   
