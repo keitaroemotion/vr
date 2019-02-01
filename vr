@@ -29,13 +29,12 @@ if [ "$option" = "-s" ]; then
   for file in "${array[@]}"
     do
       if [[ $file =~ $regex ]]; then
-        echo "$target $file"
-        echo "$target $file" | pbcopy
-        break
+        target="$target $file"
       else
         echo > /dev/null
       fi
     done
+  echo $target | pbcopy
 else
   i=0
   
